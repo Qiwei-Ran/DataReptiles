@@ -1,0 +1,41 @@
+1. __future__模块。它将 Python 新版本中的一些功能反向迁移到旧版本中
+    from __future__ import <feature>
+
+    >>> type("foo") # 旧的字面值
+    <type 'str'>
+    >>> from  __future __ import unicode_literals
+    >>> type("foo") # 现在变成了 unicode
+    <type 'unicode'>
+
+2. six模块提供一致可用的兼容层
+    compat.py文件可以写模块的兼容性处理
+    greenlet包：由解释器管理的微线程，用来替代依赖系统内核上下文切换和任务调度的普通线程，既轻量化又节约资源
+
+3.虚拟环境（应用级别的隔离）
+virtualenv用法：
+.virtualenv ENV(目录名)
+    bin/：里面包含新的 Python 可执行文件和其他包提供的脚本/可执行文件。
+    lib/和 include/：这些目录包含虚拟环境中新 Python 的支持库文件。新的Python包将会安装在 ENV/lib/pythonX.Y/site-packages/中。
+.source ENV/bin/activate
+.将所有项目依赖保存到一个 requirements.txt 文件
+    # 明确版本号，可重复性高。
+    eventlet==0.17.4
+    graceful==0.1.1
+.pip install -r requirements.txt
+.pip freeze 命令可以打印出当前环境所有的 Python 包
+
+.对于使用较新版本 Python 的开发人员来说，推荐使用 venv 而不是 Virtualenv，还有pipenv也可以
+
+4.系统级别的隔离
+A.Vagrant 的虚拟开发环境，等同于虚拟机级别隔离（默认vitrualbox）
+    a.vagrant init 创建虚拟机
+    b.vagrant up 启动虚拟机
+    c.vagrant ssh 可以像任何普通远程机器一样与开发环境进行交互
+B.Docker  可以将整个容器打包，发送到生产环境中并部署
+
+5.Python console 补全与提示 1.10.1章节，或者Ipython，Jupyter, ptpython
+6.交互式调试器
+    python -m pdb script.py
+    import pdb; pdb.set_ _trace() # 断点
+    help pdb。ipdb基于ipython
+
